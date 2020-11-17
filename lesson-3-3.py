@@ -6,12 +6,12 @@
 def my_func(first, second, third):
     """Prints 2 max arguments sum of 3"""
     try:
-        first = int(first)
-        second = int(second)
-        third = int(third)
+        first = float(first)
+        second = float(second)
+        third = float(third)
         my_list = [first, second, third]
         my_list.remove(min(my_list))
-        return sum(my_list)
+        return f'2 max arguments sum of {first}, {second}, {third} = {sum(my_list)}'
     except ValueError as v:
         return 'Enter numbers. Try again.'
 
