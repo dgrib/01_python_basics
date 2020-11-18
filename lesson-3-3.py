@@ -11,7 +11,7 @@ def my_func(first, second, third):
         third = float(third)
         my_list = [first, second, third]
         my_list.remove(min(my_list))
-        return f'2 max arguments sum of {first}, {second}, {third} = {sum(my_list)}'
+        return f'2 max arguments sum of {first}, {second}, {third} = {sum(my_list):.4f}'
     except ValueError as v:
         return 'Enter numbers. Try again.'
 

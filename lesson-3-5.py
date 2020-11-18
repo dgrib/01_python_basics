@@ -12,8 +12,8 @@ def sum_func():
         user_data = input('Enter spaces divided data for sum counting (q for quit): ')
         user_data_list = user_data.split()
 
-        if 'q' in user_data_list:
-            user_data_list.remove('q')
+        if 'q' in user_data_list:  # exclude 'q' and further elements
+            user_data_list = user_data_list[:user_data_list.index('q')]
             quit_check = False
         for i in range(len(user_data_list)):  # cleaning list from strings like ['ewf' 34 2 'et']
             try:
