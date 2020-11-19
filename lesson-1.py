@@ -26,7 +26,7 @@ user_digit = input('Enter a number 0-9: ')
 while user_digit < '0':
     user_digit = input('Your number must be grater than 0: ')
 
-print(f'{int(user_digit) + int(user_digit*2) + int(user_digit*3)}')
+print(f'{int(user_digit) + int(user_digit * 2) + int(user_digit * 3)}')
 
 # 4. Пользователь вводит целое положительное число. Найдите самую большую цифру в числе.
 # Для решения используйте цикл while и арифметические операции.
@@ -85,7 +85,17 @@ b = float(input('Введите желаемое количество км дл�
 progress = a
 day = 1
 while progress < b:
-    progress += progress*0.1
+    progress += progress * 0.1
     day += 1
 
 print(f'Ответ: на {day}-й день спортсмен достиг результата — не менее {b} км.')
+
+
+# def km(res_min, res_max, days):
+#     if res_min > res_max:
+#         return days
+#     else:
+#         return km(res_min * 1.1, res_max, days + 1)
+#
+#
+# print(km(int(input("Enter km at first day: ")), int(input("Enter desired km: ")), 1))
