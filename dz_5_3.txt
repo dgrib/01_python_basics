@@ -1,0 +1,6 @@
+Jones 35000
+Norton 60000
+Ivanov 70000
+Gomez 18000
+Watson 15000
+Brightman 55000
