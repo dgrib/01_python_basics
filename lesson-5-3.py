@@ -8,9 +8,9 @@ with open('dz_5_3.txt', 'r', encoding='utf-8') as f_obj:
     print("Employees with salary < 20000 rub:")
     for line in f_obj:
         employee_info = line.split()
-        salary_all.append(int(employee_info[1]))
-        if int(employee_info[1]) < 20000:
-            salary_less20.append(int(employee_info[1]))
+        salary_all.append(float(employee_info[1]))
+        if float(employee_info[1]) < 20000:
+            salary_less20.append(float(employee_info[1]))
             print(employee_info[0])
 
 print(f'\nAverage salary (salary < 20000 rub): {(sum(salary_less20) / len(salary_less20)):.2f} rub')
