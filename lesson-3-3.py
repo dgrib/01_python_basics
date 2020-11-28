@@ -10,8 +10,8 @@ def my_func(first, second, third):
         second = float(second)
         third = float(third)
         my_list = [first, second, third]
-        my_list.remove(min(my_list))
-        return f'2 max arguments sum of {first}, {second}, {third} = {sum(my_list):.4f}'
+        # my_list.remove(min(my_list)) нерационально снова пробегать список чтобы удалить
+        return f'2 max arguments sum of {first}, {second}, {third} = {sum(my_list) - min(my_list):.2f}'
     except ValueError as v:
         return 'Enter numbers. Try again.'
 
