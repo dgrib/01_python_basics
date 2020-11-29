@@ -15,10 +15,11 @@ class Road:
 
     def asphalt_mass(self):
         print(f'Asphalt mass for area (length: {self._length}, width: {self._width}) = ', end='')
-        print(f'{self._length * self._width * 25 * 5} t')
+        print(f'{round(self._length * self._width * 25 * 5 / 1000)} t')
 
 
-road_1 = Road(250, 6)
+road_1 = Road(2500, 6)
+print(road_1._length)
 road_1.asphalt_mass()
-road_2 = Road(50, 8)
+road_2 = Road(5000, 8)
 road_2.asphalt_mass()
