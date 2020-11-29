@@ -7,3 +7,26 @@
 Проверить работу примера, создав экземпляр и вызвав описанный метод.
 Задачу можно усложнить, реализовав проверку порядка режимов, и при его нарушении выводить соответствующее
 сообщение и завершать скрипт."""
+from time import sleep
+
+
+class TrafficLights:
+    __color = 'red'
+
+    def running(self):
+        while True:
+            self.__color = 'red'
+            self.counting(7)
+            self.__color = 'yellow'
+            self.counting(2)
+            self.__color = 'green'
+            self.counting(7)
+
+    def counting(self, seconds):
+        for i in range(seconds, 0, -1):
+            sleep(1)
+            print(self.__color, i)
+
+
+traffic_light = TrafficLights()
+traffic_light.running()
