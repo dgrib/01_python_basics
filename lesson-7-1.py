@@ -7,20 +7,20 @@
 Подсказка: сложение элементов матриц выполнять поэлементно — первый элемент первой строки первой
 матрицы складываем с первым элементом первой строки второй матрицы и т.д.
 """
+from itertools import zip_longest
 
 
 class Matrix:
     """Matrices sum count."""
+
     def __init__(self, matrix):
         self.matrix = matrix
 
     def __add__(self, other):
-        # дописать проверку для разноранговых матриц
-        # или заменять нулями несуществующие элементы
         m_sum = []
-        for sublist in zip(self.matrix, other.matrix):
+        for sublist in zip_longest(self.matrix, other.matrix, fillvalue=[]):
             temp = []
-            for numbers in zip(sublist[0], sublist[1]):
+            for numbers in zip_longest(sublist[0], sublist[1], fillvalue=0):
                 temp.append(sum(numbers))
             m_sum.append(temp)
         return Matrix(m_sum)
@@ -35,5 +35,7 @@ class Matrix:
 matrix_1 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 matrix_2 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
 matrix_3 = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+matrix_4 = Matrix([[1, 2, 3, 3], [4, 5, 6, 6], [7, 8, 9, 9]])
+matrix_5 = Matrix([[1, 2, 3], [4, 5, 6]])
 print(matrix_1 + matrix_2 + matrix_3)
-
+print(matrix_1 + matrix_4 + matrix_5)
