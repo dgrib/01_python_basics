@@ -12,53 +12,58 @@ from abc import ABC
 from abc import abstractmethod
 
 
-def get_total_square():
-    return f'Total material square: {" + ".join(Closing.sum_name)} = {Closing.sum_square:.3f} m2'
-
-
 class Closing(ABC):
     sum_square = 0
     sum_name = []
+
+    def __init__(self, name, size):
+        self.size = size
+        self.name = name
+        self.get_square
 
     @abstractmethod
     def get_square(self):
         pass
 
+    @staticmethod
+    def get_total_square():
+        return f'Total material square: {" + ".join(Closing.sum_name)} = {Closing.sum_square:.3f} m2'
+
 
 class Coat(Closing):
-    def __init__(self, name, size):
-        self.size = size
-        self.name = name
+    sum_square = None
+    sum_name = None
 
     @property
     def get_square(self):
         square = self.size / 6.5 + 0.5
         Closing.sum_square += square
         Closing.sum_name.append(self.name)
-        return f'Square of {self.name}: {square :.3f} m2'
+        print(f'Square of {self.name}: {square :.3f} m2')
+        return None
 
 
 class Suit(Closing):
-    def __init__(self, name, size):
-        self.size = size
-        self.name = name
+    sum_square = None
+    sum_name = None
 
     @property
     def get_square(self):
         square = 2 * self.size + 0.3
         Closing.sum_square += square
         Closing.sum_name.append(self.name)
-        return f'Square of {self.name}: {square :.3f} m2'
+        print(f'Square of {self.name}: {square :.3f} m2')
+        return None
 
 
 # coat sizes: 40...58
 # height sizes for suit: 1.00...2.40 m
 coat_1 = Coat("coat_1", 40)
-print(coat_1.get_square)
+# print(coat_1.get_square)
 coat_2 = Coat("coat_2", 52)
-print(coat_2.get_square)
+# print(coat_2.get_square)
 suit_1 = Suit("suit_1", 1.20)
-print(suit_1.get_square)
+# print(suit_1.get_square)
 suit_2 = Suit("suit_2", 2.05)
-print(suit_2.get_square)
-print(get_total_square())
+# print(suit_2.get_square)
+print(Closing.get_total_square())
