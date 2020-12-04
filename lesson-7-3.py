@@ -51,7 +51,7 @@ class Cell:
 cell_1 = Cell(12)
 cell_2 = Cell(10)
 cell_3 = Cell(2)
-print(cell_1 + cell_2)
+print(cell_1 + cell_2 + cell_3)
 print(cell_1 - cell_2)
 print(cell_3 - cell_1)
 print(cell_1 * cell_2)
