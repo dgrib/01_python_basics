@@ -17,7 +17,7 @@ while True:
         if divider == 0:
             raise ZeroError("Вы ввели 0, попробуйте еще раз!")
         else:
-            print(f'{num / divider:.5f}')
+            print(f'{num} / {divider} = {num / divider:.5f}')
             break
     except ZeroError as err:
         print(err)

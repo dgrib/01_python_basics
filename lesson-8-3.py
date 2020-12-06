@@ -10,6 +10,7 @@
 только если введено число. Класс-исключение должен не позволить пользователю ввести текст (не число)
 и отобразить соответствующее сообщение. При этом работа скрипта не должна завершаться.
 """
+import re
 
 
 class NumOnly(Exception):
@@ -18,15 +19,15 @@ class NumOnly(Exception):
 
 
 num_list = []
-i = input("Enter an element of a list: ")
+i = input("Enter an element of a list (stop for exit): ")
 while i != 'stop':
     try:
         if not i.isdigit():
-            raise NumOnly("Enter a number, not a string!")
+            raise NumOnly("Enter a number (not a string, not a float, not a negative number)!")
         else:
             num_list.append(i)
     except NumOnly as err:
         print(err)
-    i = input("Enter an element of a list: ")
+    i = input("Enter an element of a list (stop for exit): ")
 
 print(num_list)
