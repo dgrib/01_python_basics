@@ -19,16 +19,34 @@ from abc import abstractmethod
 
 
 class Warehouse:
-    warehouse = {'warehouse_printers': [], 'warehouse_scanners': [], 'warehouse_laptops': []}
-    accountants = {'printer': [], 'scanner': [], 'laptop': []}
-    programmers = {'printer': [], 'scanner': [], 'laptop': []}
+    warehouse = {'printers': [], 'scanners': [], 'laptops': []}
+    accountants = {'printers': [], 'scanners': [], 'laptops': []}
+    programmers = {'printers': [], 'scanners': [], 'laptops': []}
+    offices = [accountants, programmers]
 
     @staticmethod
     def get_warehouse():
         print("Содержимое склада: ")
         for key, value in Warehouse.warehouse.items():
             print('\033[91m', key, ':', '\033[0m')
-            print(value, '\n')
+            print(value)
+
+    @staticmethod
+    def del_device():
+        while True:
+            user_id = input('Выберите ID устройства для удаления (quit для выхода): ')
+            if user_id == 'quit':
+                print()
+                break
+            elif user_id.isdigit():
+                for key, value in Warehouse.warehouse.items():
+                    for device in value:
+                        if device[0] == int(user_id):
+                            device_type = key  # index устройства
+                            device = el.pop(0)  # устройство
+                            print('\n\033[91m', f'Устройство {device} удалено', '\033[0m', sep='')
+                # break
+        return device, device_type
 
 
 class OfficeEquip:
@@ -44,7 +62,7 @@ class OfficeEquip:
 
 
 class Printer(OfficeEquip):
-    def __init__(self, model, mfu=False):
+    def __init__(self, model, mfu='Not MFU'):
         super().__init__(model)
         self.mfu = mfu
 
@@ -52,7 +70,7 @@ class Printer(OfficeEquip):
         return f'{self.id} {self.model} {self.mfu}'
 
     def make_acceptance(self):
-        Warehouse.warehouse['warehouse_printers'].append([self.id, self.model, self.mfu])
+        Warehouse.warehouse['printers'].append([self.id, self.model, self.mfu])
 
     def to_some_office(self):
         pass
@@ -84,17 +102,15 @@ printer_1.make_acceptance()
 print(Warehouse.warehouse)
 
 while True:
-    print('1 - вывод информации\n2 - ввод оборудования на склад\nquit - для выхода\n')
+    print('1 - Вывод информации\n2 - Занести устройство на склад\n'
+          '3 - Перенести устройство со склада в отдел\n4 - Удалить устройство\nquit - Выход\n')
     user_key = input("Введите номер операции: ").lower()
     if user_key == 'quit':
         break
     elif user_key == '1':
         Warehouse.get_warehouse()
-        # for key, value in Warehouse.warehouse.items():
-        #     print('\033[91m', key, ':', '\033[0m')
-        #     print(value, '\n')
     elif user_key == '2':
-        user_key = input('1 - ввод принтера\n2 - ввод сканера\n3 - ввод ноутбука\nquit - выход\nВведите номер '
+        user_key = input('1 - принтер\n2 - сканер\n3 - ноутбук\nquit - выход\nВведите номер '
                          'операции: ')
         if user_key == 'quit':
             print()
@@ -102,6 +118,33 @@ while True:
         elif user_key == '1':
             name = input('Введите модель принтера: ')
             if_mfu = input('Наличие функции МФУ: (+ / - (по умолчанию)): ')
-            printer_1 = Printer(name, True if if_mfu == '+' else False)
+            printer_1 = Printer(name, 'MFU' if if_mfu == '+' else 'Not MFU')
             printer_1.make_acceptance()
             Warehouse.get_warehouse()
+    elif user_key == '3':
+        Warehouse.get_warehouse()
+        user_id = input('Выберите ID устройства для переноса в отдел (quit для выхода): ')
+        device, device_type = Warehouse.del_device()
+        # [2, wsf? wef]
+
+        print('1 - Бухгалтерия>\n2 - Программисты\nquit - выход\nВведите номер отдела: ')
+        user_office = input('Введите отдел для переноса устройства: ')
+        if user_office == 'quit':
+            print()
+            continue
+        elif user_office.isdigit():
+            Warehouse.offices[int(user_office) - 1][device_type].append(device)
+            # for office in range(1, len(Warehouse.offices)):
+            print(Warehouse.offices)
+
+            # accountants = {'printers': [], 'scanners': [], 'laptops': []}
+            # programmers = {'printers': [], 'scanners': [], 'laptops': []}
+            # offices = [accountants, programmers]
+            # for el in Warehouse.warehouse.values():
+            #     for device in el:
+            #         if device[0] == int(user_office):
+            #             device = el.pop(0)
+            #             print('\n\033[91m', f'Устройство {device} удалено', '\033[0m', sep='')
+    elif user_key == '4':
+        Warehouse.get_warehouse()
+        Warehouse.del_device()
